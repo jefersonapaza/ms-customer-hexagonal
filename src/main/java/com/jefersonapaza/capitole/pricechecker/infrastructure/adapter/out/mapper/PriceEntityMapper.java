@@ -4,6 +4,8 @@ import com.jefersonapaza.capitole.pricechecker.domain.model.Price;
 import com.jefersonapaza.capitole.pricechecker.infrastructure.adapter.out.entity.PriceEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.Currency;
+
 /**
  * Author: Jeferson Apaza
  * Date: 2025-03-21
@@ -23,7 +25,7 @@ public class PriceEntityMapper {
             .productId(price.getProductId())
             .priority(price.getPriority())
             .price(price.getPrice())
-            .currency(price.getCurrency())
+            .currency(price.getCurrency().getCurrencyCode())
             .build();
   }
 
@@ -36,7 +38,7 @@ public class PriceEntityMapper {
             entity.getProductId(),
             entity.getPriority(),
             entity.getPrice(),
-            entity.getCurrency()
+            Currency.getInstance(entity.getCurrency())
     );
   }
 
