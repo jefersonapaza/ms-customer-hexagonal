@@ -1,6 +1,7 @@
 package com.jefersonapaza.capitole.pricechecker.application.usecase;
 
-import com.jefersonapaza.capitole.pricechecker.domain.model.Price;
+import com.jefersonapaza.capitole.pricechecker.application.dto.PriceResponseDto;
+import com.jefersonapaza.capitole.pricechecker.application.mapper.PriceResponseMapper;
 import com.jefersonapaza.capitole.pricechecker.domain.port.PriceRepository;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -19,9 +20,11 @@ import lombok.RequiredArgsConstructor;
 public class GetPriceUseCase {
 
   private final PriceRepository priceRepository;
+  private final PriceResponseMapper responseMapper;
 
-  public Optional<Price> execute(Long productId, Long brandId, LocalDateTime date) {
-    return priceRepository.findApplicablePrice(productId, brandId, date);
+  public Optional<PriceResponseDto> execute(Long productId, Long brandId, LocalDateTime date) {
+    return priceRepository.findApplicablePrice(productId, brandId, date)
+            .map(responseMapper::toDto);
   }
 
 }
