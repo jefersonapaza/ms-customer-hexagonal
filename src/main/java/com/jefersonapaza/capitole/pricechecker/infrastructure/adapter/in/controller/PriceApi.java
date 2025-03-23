@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
+
+import java.time.LocalDateTime;
 
 @Validated
 @RestController
@@ -49,11 +51,10 @@ public interface PriceApi {
             produces = { "application/json" }
     )
     @ResponseStatus(HttpStatus.OK)
-    PriceResponse getPrice(
+    ResponseEntity<PriceResponse> getPrice(
             @NotNull @Parameter(name = "productId", description = "ID of the product.", required = true, in = ParameterIn.QUERY) @RequestParam("productId") Long productId,
             @NotNull @Parameter(name = "brandId", description = "ID of the brand.", required = true, in = ParameterIn.QUERY) @RequestParam("brandId") Long brandId,
-            @NotNull @Parameter(name = "applicationDate", description = "Date of application (yyyy-MM-dd HH:mm:ss).", required = true, in = ParameterIn.QUERY) @RequestParam("applicationDate") String applicationDate,
-            @Parameter(hidden = true) final ServerWebExchange exchange
+            @NotNull @Parameter(name = "applicationDate", description = "Date of application (yyyy-MM-dd).", required = true, in = ParameterIn.QUERY) @RequestParam("applicationDate") LocalDateTime applicationDate
     );
 
 }
