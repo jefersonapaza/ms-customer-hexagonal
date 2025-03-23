@@ -6,6 +6,7 @@ import com.jefersonapaza.capitole.pricechecker.domain.port.PriceRepository;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 /**
  * Author: Jeferson Apaza
@@ -15,7 +16,7 @@ import lombok.RequiredArgsConstructor;
  * Application use case to retrieve the applicable price based on business rules,
  * orchestrating the domain logic and infrastructure access for price selection.
  */
-
+@Service
 @RequiredArgsConstructor
 public class GetPriceUseCase {
 
