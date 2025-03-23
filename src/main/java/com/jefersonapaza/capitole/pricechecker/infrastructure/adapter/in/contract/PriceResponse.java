@@ -21,7 +21,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 @Schema(description = "Representa la respuesta con la información del precio")
-public class PriceRestResponse {
+public class PriceResponse {
 
   @Schema(description = "ID del producto")
   @JsonProperty("product_id")
