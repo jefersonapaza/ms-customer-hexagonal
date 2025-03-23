@@ -30,8 +30,12 @@ public class PriceApiController implements PriceApi {
             @NotNull @RequestParam("applicationDate")
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime applicationDate
     ) {
-        return getPriceUseCase.execute(productId, brandId, applicationDate)
+
+      if (productId <= 0 || brandId <= 0) {
+            throw new IllegalArgumentException("Product ID and Brand ID must be positive numbers");
+      }
+      return getPriceUseCase.execute(productId, brandId, applicationDate)
                 .map(dto -> ResponseEntity.ok(priceMapper.toResponse(dto)))
-                .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.noContent().build());
     }
 }
