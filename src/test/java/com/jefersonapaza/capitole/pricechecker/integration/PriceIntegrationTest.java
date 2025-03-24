@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.jefersonapaza.capitole.pricechecker.PriceCheckerApplication;
 import com.jefersonapaza.capitole.pricechecker.infrastructure.adapter.in.contract.PriceResponse;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -52,6 +53,36 @@ public class PriceIntegrationTest {
       assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
       assertThat(response.getBody()).isNotNull();
       assertThat(response.getBody().getPrice()).isEqualTo(testCase.expectedPrice);
+
+  }
+
+  @Test
+  void givenNonMatchingDate_whenGetPrice_thenReturnsNoContent() {
+        // Arrange
+        String baseUrl = "http://localhost:" + port + "/price";
+        String url = baseUrl + "?productId=35455&brandId=1&applicationDate=2025-12-31 23:59:59";
+
+        // Act
+        ResponseEntity<PriceResponse> response = restTemplate.getForEntity(url, PriceResponse.class);
+
+        // Assert
+        assertThat(response.getStatusCode().value()).isEqualTo(204);
+        assertThat(response.getBody()).isNull();
+  }
+
+  @Test
+  void givenMissingRequestParam_whenGetPrice_thenReturnsInternalServerError() {
+        // Arrange
+        String baseUrl = "http://localhost:" + port + "/price";
+        // Faltando el parámetro applicationDate
+        String url = baseUrl + "?productId=35455&brandId=1";
+
+        // Act
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+
+        // Assert
+        assertThat(response.getStatusCode().value()).isEqualTo(500);
+        assertThat(response.getBody()).contains("unexpected error");
 
   }
 
