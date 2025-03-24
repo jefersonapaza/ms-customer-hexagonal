@@ -54,7 +54,7 @@ public interface PriceApi {
     ResponseEntity<PriceResponse> getPrice(
             @NotNull @Parameter(name = "productId", description = "ID of the product.", required = true, in = ParameterIn.QUERY) @RequestParam("productId") Long productId,
             @NotNull @Parameter(name = "brandId", description = "ID of the brand.", required = true, in = ParameterIn.QUERY) @RequestParam("brandId") Long brandId,
-            @NotNull @Parameter(name = "applicationDate", description = "Date of application (yyyy-MM-dd).", required = true, in = ParameterIn.QUERY) @RequestParam("applicationDate") LocalDateTime applicationDate
+            @NotNull @Parameter(name = "applicationDate", description = "Date of application (yyyy-MM-dd HH:mm:ss).", required = true, in = ParameterIn.QUERY) @RequestParam("applicationDate") LocalDateTime applicationDate
     );
 
 }

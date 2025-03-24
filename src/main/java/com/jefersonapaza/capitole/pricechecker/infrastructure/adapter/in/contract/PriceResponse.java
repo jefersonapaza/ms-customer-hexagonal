@@ -1,5 +1,6 @@
 package com.jefersonapaza.capitole.pricechecker.infrastructure.adapter.in.contract;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
@@ -35,21 +36,17 @@ public class PriceResponse {
   @JsonProperty("price_list")
   private Long priceList;
 
-  @Schema(description = "Prioridad de la tarifa")
-  private Integer priority;
-
   @Schema(description = "Precio final aplicado")
   private BigDecimal price;
 
-  @Schema(description = "Moneda del precio", example = "EUR")
-  private String currency;
-
-  @Schema(description = "Fecha de inicio de validez del precio", example = "2020-06-14T00:00:00")
+  @Schema(description = "Fecha de inicio de validez del precio", example = "2020-06-14 10:10:00")
   @JsonProperty("start_date")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime startDate;
 
-  @Schema(description = "Fecha de fin de validez del precio", example = "2020-12-31T23:59:59")
+  @Schema(description = "Fecha de fin de validez del precio", example = "2020-12-31 22:59:59")
   @JsonProperty("end_date")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime endDate;
 
 }

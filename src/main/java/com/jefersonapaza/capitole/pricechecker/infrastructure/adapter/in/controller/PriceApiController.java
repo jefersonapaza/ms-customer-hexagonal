@@ -28,7 +28,7 @@ public class PriceApiController implements PriceApi {
             @NotNull @RequestParam("productId") Long productId,
             @NotNull @RequestParam("brandId") Long brandId,
             @NotNull @RequestParam("applicationDate")
-            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime applicationDate
+            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime applicationDate
     ) {
 
       if (productId <= 0 || brandId <= 0) {
