@@ -19,7 +19,8 @@ public class GlobalExceptionHandler {
         ServerErrorResponse response = ServerErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .code(HttpStatus.BAD_REQUEST.value())
-                .message("Invalid request parameters: " + ex.getMessage())
+                .message("Invalid request parameters: please check productId, brandId and applicationDate format (yyyy-MM-dd HH:mm:ss)")
+
                 .build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -31,7 +32,7 @@ public class GlobalExceptionHandler {
         ServerErrorResponse response = ServerErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .message("Internal server error: " + ex.getMessage())
+                .message("An unexpected error occurred while processing the request")
                 .build();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);

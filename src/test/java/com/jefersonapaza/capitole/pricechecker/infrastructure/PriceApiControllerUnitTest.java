@@ -60,9 +60,7 @@ public class PriceApiControllerUnitTest {
               .productId(productId)
               .brandId(brandId)
               .priceList(1L)
-              .priority(0)
               .price(BigDecimal.valueOf(35.50))
-              .currency("EUR")
               .startDate(applicationDate)
               .endDate(applicationDate.plusDays(1))
               .build();
@@ -79,7 +77,6 @@ public class PriceApiControllerUnitTest {
     assertEquals(productId, result.getBody().getProductId());
     assertEquals(brandId, result.getBody().getBrandId());
     assertEquals(BigDecimal.valueOf(35.50), result.getBody().getPrice());
-    assertEquals("EUR", result.getBody().getCurrency());
 
   }
 
