@@ -12,11 +12,9 @@ public class PriceMapper {
                 .price(dto.getPrice())
                 .brandId(dto.getBrandId())
                 .productId(dto.getProductId())
-                .currency(dto.getCurrency().getCurrencyCode())
                 .startDate(dto.getStartDate())
                 .endDate(dto.getEndDate())
                 .priceList(dto.getPriceList())
-                .priority(dto.getPriority())
                 .build();
     }
 }
